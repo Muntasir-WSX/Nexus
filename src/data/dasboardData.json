@@ -1,0 +1,219 @@
+{
+  "activeUser": {
+    "name": "Emily King",
+    "role": "Realtor",
+    "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"
+  },
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Gregory Clark",
+      "role": "Manager",
+      "phone": "(555) 123-4567",
+      "email": "clark@gmail.com",
+      "location": "New York, USA",
+      "specialty": "Manager",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770899573/user2_a2cs3g.jpg",
+      "stats": { "averageScore": 430, "dealStarted": 19, "lostDeals": 25, "wonDeals": 24, "scoreGain": "+138 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 138, "color": "#F3FF90" },
+        { "label": "Dots", "value": 20, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 123, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 123, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "George Allen",
+      "role": "Broker",
+      "phone": "(555) 987-6543",
+      "email": "george.allen@nexus.com",
+      "location": "Chicago, USA",
+      "specialty": "Real Estate Broker",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770900330/user10_oga6fp.jpg",
+      "stats": { "averageScore": 310, "dealStarted": 12, "lostDeals": 10, "wonDeals": 45, "scoreGain": "+85 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 90, "color": "#F3FF90" },
+        { "label": "Dots", "value": 40, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 150, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 80, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Megan Brooks",
+      "role": "Analyst",
+      "phone": "(555) 456-7890",
+      "email": "m.brooks@nexus.com",
+      "location": "Los Angeles, USA",
+      "specialty": "Data Analyst",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg",
+      "stats": { "averageScore": 520, "dealStarted": 30, "lostDeals": 5, "wonDeals": 52, "scoreGain": "+210 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 200, "color": "#F3FF90" },
+        { "label": "Dots", "value": 15, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 100, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 205, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Logan Smith",
+      "role": "Manager",
+      "phone": "(555) 111-2222",
+      "email": "logan.s@nexus.com",
+      "location": "Houston, USA",
+      "specialty": "Project Manager",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770902014/user13_upighw.jpg",
+      "stats": { "averageScore": 280, "dealStarted": 8, "lostDeals": 15, "wonDeals": 10, "scoreGain": "+40 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 70, "color": "#F3FF90" },
+        { "label": "Dots", "value": 30, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 90, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 90, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Abigail Green",
+      "role": "Investor",
+      "phone": "(555) 333-4444",
+      "email": "abigail.g@nexus.com",
+      "location": "Seattle, USA",
+      "specialty": "Equity Investor",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706183/blog2_teii1x.jpg",
+      "stats": { "averageScore": 640, "dealStarted": 45, "lostDeals": 2, "wonDeals": 78, "scoreGain": "+315 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 250, "color": "#F3FF90" },
+        { "label": "Dots", "value": 10, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 180, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 200, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Morgan Lee",
+      "role": "Investor",
+      "phone": "(555) 555-6666",
+      "email": "morgan.lee@nexus.com",
+      "location": "Boston, USA",
+      "specialty": "Real Estate Analyst",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770899575/user8_fmp8tj.jpg",
+      "stats": { "averageScore": 410, "dealStarted": 22, "lostDeals": 12, "wonDeals": 30, "scoreGain": "+95 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 120, "color": "#F3FF90" },
+        { "label": "Dots", "value": 25, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 130, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 135, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Regina Adams",
+      "role": "Assistant",
+      "phone": "(555) 777-8888",
+      "email": "regina.a@nexus.com",
+      "location": "Atlanta, USA",
+      "specialty": "Sales Assistant",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770899573/user5_z1sayv.jpg",
+      "stats": { "averageScore": 350, "dealStarted": 15, "lostDeals": 5, "wonDeals": 28, "scoreGain": "+60 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 100, "color": "#F3FF90" },
+        { "label": "Dots", "value": 20, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 110, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 120, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Angela Grant",
+      "role": "Appraiser",
+      "phone": "(555) 888-9999",
+      "email": "angela.g@nexus.com",
+      "location": "Denver, USA",
+      "specialty": "Property Appraiser",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770899574/user_7_czdpqu.jpg",
+      "stats": { "averageScore": 390, "dealStarted": 18, "lostDeals": 4, "wonDeals": 22, "scoreGain": "+45 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 115, "color": "#F3FF90" },
+        { "label": "Dots", "value": 15, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 130, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 130, "color": "#BDBDBD" }
+      ]
+    }
+  ],
+  "favorite_contacts": [
+    {
+      "id": 9,
+      "name": "Douglas Brown",
+      "role": "Manager",
+      "phone": "(555) 000-1111",
+      "email": "douglas.b@nexus.com",
+      "location": "Miami, USA",
+      "specialty": "Operations Manager",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1747153337/lawyers9_jq8flg.jpg",
+      "stats": { "averageScore": 460, "dealStarted": 25, "lostDeals": 8, "wonDeals": 32, "scoreGain": "+110 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 140, "color": "#F3FF90" },
+        { "label": "Dots", "value": 20, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 140, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 160, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Edgar White",
+      "role": "Realtor",
+      "phone": "(555) 222-0000",
+      "email": "edgar.w@nexus.com",
+      "location": "Portland, USA",
+      "specialty": "Residential Realtor",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1747153336/lawyers4_oo0sxr.jpg",
+      "stats": { "averageScore": 320, "dealStarted": 14, "lostDeals": 12, "wonDeals": 18, "scoreGain": "+55 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 95, "color": "#F3FF90" },
+        { "label": "Dots", "value": 30, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 100, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 95, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Emma Johnson",
+      "role": "Investor",
+      "phone": "(555) 333-2222",
+      "email": "emma.j@nexus.com",
+      "location": "San Francisco, USA",
+      "specialty": "Venture Capitalist",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770900330/user12_ipoved.jpg",
+      "stats": { "averageScore": 580, "dealStarted": 38, "lostDeals": 3, "wonDeals": 65, "scoreGain": "+280 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 220, "color": "#F3FF90" },
+        { "label": "Dots", "value": 10, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 160, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 190, "color": "#BDBDBD" }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Liam Wright",
+      "role": "Assistant",
+      "phone": "(555) 444-5555",
+      "email": "liam.w@nexus.com",
+      "location": "Austin, USA",
+      "specialty": "Office Assistant",
+      "avatar": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1770900330/user11_gaqtuk.jpg",
+      "stats": { "averageScore": 290, "dealStarted": 10, "lostDeals": 6, "wonDeals": 15, "scoreGain": "+35 pts" },
+      "analytics": [
+        { "label": "Yellow", "value": 80, "color": "#F3FF90" },
+        { "label": "Dots", "value": 25, "color": "#E2E2E2" },
+        { "label": "Gray", "value": 95, "color": "#D1D1D1" },
+        { "label": "Stripe", "value": 90, "color": "#BDBDBD" }
+      ]
+    }
+  ],
+  "propertyPreview": {
+    "address": "23345 Brightwood Cottage, New York, OR 97477",
+    "image": "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1775843506/property_mpcpcj.jpg"
+  }
+}
