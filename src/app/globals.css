@@ -1,3 +1,10 @@
+@import "tailwindcss";
+
+html,
+body {
+  height: 100%;
+}
+
 /* Custom scrollbar to match the sleek UI */
 .custom-scrollbar::-webkit-scrollbar {
   width: 5px;

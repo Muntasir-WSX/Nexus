@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/sharedComponents/navbar/navbar";
 
 
 const geistSans = Geist({
@@ -20,16 +21,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-[#F1F4F2] h-screen overflow-hidden`}>
-        <div className="flex h-full min-w-0 overflow-hidden">
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[#F1F4F2] h-screen overflow-hidden flex flex-col`}>
         
+        {/* Navbar upore thakbe full width niye */}
+        <Navbar />
 
-          <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-            <main className="min-w-0 flex-1 overflow-hidden">
-              {children}
-            </main>
-          </div>
+        {/* Niche baki children (Sidebar, Page content etc) horizontally thakbe */}
+        <div className="flex flex-1 overflow-hidden">
+          {children}
         </div>
+        
       </body>
     </html>
   );

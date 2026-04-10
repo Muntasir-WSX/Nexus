@@ -1,30 +1,29 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function Logo({ size = 40, className = "", color = "currentColor" }) {
+export default function Logo({ size = 32, className = "", color = "#111827" }) {
   return (
-    <Link href="/" className={`flex items-center justify-center ${className}`}>
+    <Link href="/" className={`inline-flex items-center justify-center ${className}`}>
       <svg 
         width={size} 
         height={size} 
-        viewBox="0 0 40 40" 
+        viewBox="0 0 24 24" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Main Circle */}
+        {/* Main Circle - Adjusted for 24x24 grid */}
         <circle 
-          cx="20" 
-          cy="22" 
-          r="10" 
+          cx="11" 
+          cy="13" 
+          r="7" 
           stroke={color} 
-          strokeWidth="3.5" 
-          fill="none"
+          strokeWidth="2.5" 
         />
-        {/* Top Right Dot */}
+        {/* Top Right Dot - Compact position */}
         <circle 
-          cx="32" 
-          cy="10" 
-          r="3" 
+          cx="19" 
+          cy="5" 
+          r="2.5" 
           fill={color} 
         />
       </svg>

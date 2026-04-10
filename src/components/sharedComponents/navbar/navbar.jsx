@@ -1,38 +1,41 @@
 import React from 'react';
 import { Search, ChevronDown, SlidersHorizontal } from 'lucide-react';
+import Image from 'next/image';
+import Logo from '../Logo/logo';
 
 export default function Navbar({ activeUser }) {
   return (
-    <nav className="flex w-full items-center justify-between px-6 pt-4 pb-3">
+    <nav className="flex w-full items-center justify-between px-6 py-4">
       
-      {/* 1. Left Section: Search */}
-      <div className="flex flex-1 items-center max-w-[760px] pl-4">
-        
-        <div className="w-full">
-          <div className="relative flex items-center group">
-            <Search className="absolute left-4 text-gray-400" size={18} />
-            <input 
-              type="text" 
-              placeholder="Search by Contact, Account, Deal..." 
-              className="w-full rounded-3xl border border-white bg-white/70 py-3 pl-12 pr-12 text-sm shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-200"
-            />
-            <div className="absolute right-3 cursor-pointer rounded-full border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
-              <ChevronDown size={14} />
-            </div>
+      {/* 1. Left Section: Logo */}
+      <div className="flex items-center w-[60px]">
+      <Logo></Logo>
+      </div>
+
+      {/* 2. Middle Section: Search Bar */}
+      <div className="flex flex-1 items-center justify-center max-w-[800px] px-8">
+        <div className="w-full relative group">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+          <input 
+            type="text" 
+            placeholder="Search by Contact, Account, Deal..." 
+            className="w-full rounded-[24px] border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
+          />
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-gray-100 bg-white p-2 text-gray-400 shadow-sm hover:text-black">
+            <ChevronDown size={14} />
           </div>
         </div>
       </div>
 
-      {/* 2. Right Section: User Profile & Settings */}
+      {/* 3. Right Section: Profile & Settings */}
       <div className="flex items-center gap-3">
-        {/* User Profile Card */}
-        <div className="flex items-center gap-3 bg-white/90 p-1.5 pr-4 rounded-[20px] border border-white shadow-sm">
-          {/* Avatar with Fixed Yellow Background */}
-          <div className="w-10 h-10 rounded-xl bg-[#F3FF90] flex items-center justify-center overflow-hidden">
+        {/* User Card */}
+        <div className="flex items-center gap-3 bg-white/80 p-1 pr-5 rounded-[22px] border border-white shadow-sm">
+          <div className="w-11 h-11 rounded-[14px] bg-[#F3FF90] flex items-center justify-center overflow-hidden">
             <img 
               src={activeUser?.avatar || "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"} 
               alt="User" 
-              className="w-full h-full object-cover mix-blend-multiply opacity-90"
+              className="w-full h-full object-cover mix-blend-multiply"
             />
           </div>
           
@@ -40,15 +43,15 @@ export default function Navbar({ activeUser }) {
             <span className="text-[13px] font-bold text-gray-800 leading-tight">
               {activeUser?.name || "Emily King"}
             </span>
-            <span className="text-[11px] text-gray-400 font-medium">
+            <span className="text-[10px] text-gray-400 font-semibold tracking-wide uppercase">
               {activeUser?.role || "Realtor"}
             </span>
           </div>
         </div>
 
-        {/* Settings Icon */}
-        <div className="cursor-pointer rounded-2xl border border-white bg-white/80 p-3 text-gray-500 shadow-sm transition-all hover:text-black">
-          <SlidersHorizontal size={18} strokeWidth={2.5} />
+        {/* Sliders Icon */}
+        <div className="cursor-pointer rounded-[18px] border border-white bg-white/80 p-3.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black">
+          <SlidersHorizontal size={18} strokeWidth={2.2} />
         </div>
       </div>
     </nav>
