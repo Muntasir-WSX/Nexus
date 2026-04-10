@@ -23,7 +23,7 @@ function StatCard({ title, value, color }) {
 		<div className="rounded-2xl border border-white/70 bg-white/70 p-4 shadow-sm">
 			<p className="text-[11px] font-medium text-gray-500">{title}</p>
 			<p className="mt-1 text-[44px] leading-none font-light tracking-tight text-gray-800">{value}</p>
-			<div className="mt-4 h-5 rounded-lg bg-gray-100 p-[2px]">
+			<div className="mt-4 h-5 rounded-lg bg-gray-100 p-0.5">
 				<div className="h-full w-2/3 rounded-md" style={{ backgroundColor: color }} />
 			</div>
 		</div>
@@ -55,7 +55,7 @@ export default function MainProfile({ contact, propertyPreview }) {
 						<img
 							src={contact.avatar}
 							alt={contact.name}
-							className="h-52 w-full object-cover object-top md:h-56 lg:h-[230px]"
+							className="h-52 w-full object-cover object-top md:h-56 lg:h-57.5"
 						/>
 					</div>
 				</div>
@@ -82,7 +82,7 @@ export default function MainProfile({ contact, propertyPreview }) {
 				<img
 					src={propertyPreview?.image}
 					alt={propertyPreview?.address || "Property preview"}
-					className="h-40 w-full rounded-2xl object-cover md:h-48 lg:h-[160px]"
+					className="h-40 w-full rounded-2xl object-cover md:h-48 lg:h-40"
 				/>
 				<p className="mt-3 text-[18px] font-light leading-tight text-gray-800 md:text-[20px] lg:text-[22px]">{propertyPreview?.address}</p>
 			</div>

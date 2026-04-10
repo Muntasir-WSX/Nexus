@@ -19,7 +19,6 @@ export default function Logo({ size = 32, className = "", color = "#111827" }) {
           stroke={color} 
           strokeWidth="2.5" 
         />
-        {/* Top Right Dot - Compact position */}
         <circle 
           cx="19" 
           cy="5" 

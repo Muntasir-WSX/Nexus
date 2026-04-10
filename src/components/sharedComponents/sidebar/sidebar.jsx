@@ -33,7 +33,7 @@ function SidebarItem({ icon: Icon, active = false }) {
 export default function Sidebar({ mobile = false }) {
   return (
     <aside
-      className={`flex h-full w-[92px] shrink-0 flex-col items-center py-5 ${
+      className={`flex h-full w-23 shrink-0 flex-col items-center py-5 ${
         mobile ? "bg-transparent" : "border-r border-gray-200/40 bg-transparent"
       }`}
     >

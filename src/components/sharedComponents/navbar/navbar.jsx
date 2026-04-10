@@ -18,7 +18,7 @@ export default function Navbar({ activeUser }) {
         className="flex w-full items-center justify-between px-3 py-3 sm:px-6 sm:py-4"
       >
         {/* 1. Left Section: Menu + Logo */}
-        <div className="flex items-center gap-2 sm:w-[60px]">
+        <div className="flex items-center gap-2 sm:w-15">
           <button
             type="button"
             onClick={() => setIsDrawerOpen(true)}
@@ -31,13 +31,13 @@ export default function Navbar({ activeUser }) {
         </div>
 
         {/* 2. Middle Section: Search Bar */}
-        <div className="hidden flex-1 items-center justify-center px-4 sm:flex sm:max-w-[800px] sm:px-8">
+        <div className="hidden flex-1 items-center justify-center px-4 sm:flex sm:max-w-200 sm:px-8">
           <div className="group relative w-full">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
               placeholder="Search by Contact, Account, Deal..."
-              className="w-full rounded-[24px] border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
+              className="w-full rounded-3xl border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
             />
             <motion.div
               whileHover={{ scale: 1.04 }}
@@ -53,7 +53,7 @@ export default function Navbar({ activeUser }) {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* User Card */}
           <div className="flex items-center gap-2 rounded-[22px] border border-white bg-white/80 p-1 pr-2 shadow-sm sm:gap-3 sm:pr-5">
-            <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-[12px] bg-[#F3FF90] sm:h-11 sm:w-11 sm:rounded-[14px]">
+            <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-[#F3FF90] sm:h-11 sm:w-11 sm:rounded-[14px]">
               <img
                 src={activeUser?.avatar || "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"}
                 alt="User"
@@ -75,7 +75,7 @@ export default function Navbar({ activeUser }) {
           <motion.div
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="cursor-pointer rounded-[16px] border border-white bg-white/80 p-2.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black sm:rounded-[18px] sm:p-3.5"
+            className="cursor-pointer rounded-2xl border border-white bg-white/80 p-2.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black sm:rounded-[18px] sm:p-3.5"
           >
             <SlidersHorizontal size={18} strokeWidth={2.2} />
           </motion.div>
@@ -98,12 +98,12 @@ export default function Navbar({ activeUser }) {
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="fixed left-0 top-0 z-50 h-full w-[92px] bg-[#F1F4F2] xl:hidden"
+              className="fixed left-0 top-0 z-50 h-full w-23 bg-[#F1F4F2] xl:hidden"
             >
               <button
                 type="button"
                 onClick={() => setIsDrawerOpen(false)}
-                className="absolute right-[-44px] top-4 grid h-10 w-10 place-items-center rounded-2xl bg-white text-gray-700 shadow-sm"
+                className="absolute -right-11 top-4 grid h-10 w-10 place-items-center rounded-2xl bg-white text-gray-700 shadow-sm"
                 aria-label="Close menu"
               >
                 <X size={18} />

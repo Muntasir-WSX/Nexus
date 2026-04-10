@@ -50,7 +50,7 @@ export default function Page() {
         </div>
 
         <div className="hidden min-h-0 flex-1 gap-3 md:flex">
-          <aside className="custom-scrollbar min-h-0 w-[292px] overflow-y-auto rounded-3xl border border-white/70 bg-white/35 p-3">
+          <aside className="custom-scrollbar min-h-0 w-73 overflow-y-auto rounded-3xl border border-white/70 bg-white/35 p-3">
             <ContactList onContactSelect={setSelectedContact} />
           </aside>
 

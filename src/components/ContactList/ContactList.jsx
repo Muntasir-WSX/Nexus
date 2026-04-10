@@ -18,7 +18,7 @@ function SectionHeader({ count, title }) {
 	return (
 		<div className="flex items-center justify-between px-2 py-4">
 			<div className="flex items-center gap-3">
-				<span className="min-w-[28px] rounded-lg bg-white px-2 py-1 text-center text-[10px] font-bold text-gray-700 shadow-sm">
+				<span className="min-w-7 rounded-lg bg-white px-2 py-1 text-center text-[10px] font-bold text-gray-700 shadow-sm">
 					{count}
 				</span>
 				<h3 className="text-[12px] font-semibold tracking-tight text-gray-700">{title}</h3>
@@ -35,7 +35,7 @@ function ContactRow({ contact, active, onClick }) {
 			onClick={onClick}
 			whileHover={{ y: -1 }}
 			whileTap={{ scale: 0.995 }}
-			className={`relative mb-1 flex w-full items-center justify-between rounded-[16px] px-2 py-2 text-left transition-all ${
+			className={`relative mb-1 flex w-full items-center justify-between rounded-2xl px-2 py-2 text-left transition-all ${
 				active ? "bg-white shadow-[0_6px_18px_rgba(0,0,0,0.04)]" : "hover:bg-white/60"
 			}`}
 		>
@@ -63,7 +63,7 @@ function ContactRow({ contact, active, onClick }) {
 						initial={{ opacity: 0, x: 4 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: 4 }}
-						className="absolute right-0 h-6 w-[3px] rounded-l-full bg-black"
+						className="absolute right-0 h-6 w-0.75 rounded-l-full bg-black"
 					/>
 				) : null}
 			</AnimatePresence>
@@ -90,7 +90,7 @@ export default function ContactList({ onContactSelect }) {
 	};
 
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex h-full w-full max-w-[280px] flex-col pr-1 lg:w-[280px]">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex h-full w-full max-w-70 flex-col pr-1 lg:w-70">
 			<div className="mb-5 flex items-center justify-between px-2">
 				<h2 className="text-[42px] font-light leading-none tracking-tighter text-gray-800">All Contacts</h2>
 				<div className="flex items-center gap-1.5">
