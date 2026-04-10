@@ -1,74 +1,119 @@
 "use client";
 
-import React from 'react';
-import { Search, ChevronDown, SlidersHorizontal } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Search, ChevronDown, SlidersHorizontal, Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Logo from '../Logo/logo';
+import Sidebar from '../sidebar/sidebar';
 
 export default function Navbar({ activeUser }) {
-  return (
-    <motion.nav
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      className="flex w-full items-center justify-between px-6 py-4"
-    >
-      
-      {/* 1. Left Section: Logo */}
-      <div className="flex items-center w-[60px]">
-      <Logo></Logo>
-      </div>
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-      {/* 2. Middle Section: Search Bar */}
-      <div className="flex flex-1 items-center justify-center max-w-[800px] px-8">
-        <div className="w-full relative group">
-          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-          <input 
-            type="text" 
-            placeholder="Search by Contact, Account, Deal..." 
-            className="w-full rounded-[24px] border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
-          />
-          <motion.div
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-gray-100 bg-white p-2 text-gray-400 shadow-sm hover:text-black"
+  return (
+    <>
+      <motion.nav
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        className="flex w-full items-center justify-between px-3 py-3 sm:px-6 sm:py-4"
+      >
+        {/* 1. Left Section: Menu + Logo */}
+        <div className="flex items-center gap-2 sm:w-[60px]">
+          <button
+            type="button"
+            onClick={() => setIsDrawerOpen(true)}
+            className="grid h-10 w-10 place-items-center rounded-2xl border border-white/80 bg-white/80 text-gray-700 shadow-sm lg:hidden"
+            aria-label="Open menu"
           >
-            <ChevronDown size={14} />
+            <Menu size={18} />
+          </button>
+          <Logo />
+        </div>
+
+        {/* 2. Middle Section: Search Bar */}
+        <div className="hidden flex-1 items-center justify-center px-4 sm:flex sm:max-w-[800px] sm:px-8">
+          <div className="group relative w-full">
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+            <input
+              type="text"
+              placeholder="Search by Contact, Account, Deal..."
+              className="w-full rounded-[24px] border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
+            />
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-gray-100 bg-white p-2 text-gray-400 shadow-sm hover:text-black"
+            >
+              <ChevronDown size={14} />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* 3. Right Section: Profile & Settings */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* User Card */}
+          <div className="flex items-center gap-2 rounded-[22px] border border-white bg-white/80 p-1 pr-2 shadow-sm sm:gap-3 sm:pr-5">
+            <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-[12px] bg-[#F3FF90] sm:h-11 sm:w-11 sm:rounded-[14px]">
+              <img
+                src={activeUser?.avatar || "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"}
+                alt="User"
+                className="h-full w-full object-cover mix-blend-multiply"
+              />
+            </div>
+
+            <div className="hidden flex-col sm:flex">
+              <span className="text-[13px] font-bold leading-tight text-gray-800">
+                {activeUser?.name || "Emily King"}
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
+                {activeUser?.role || "Realtor"}
+              </span>
+            </div>
+          </div>
+
+          {/* Sliders Icon */}
+          <motion.div
+            whileHover={{ y: -1, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="cursor-pointer rounded-[16px] border border-white bg-white/80 p-2.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black sm:rounded-[18px] sm:p-3.5"
+          >
+            <SlidersHorizontal size={18} strokeWidth={2.2} />
           </motion.div>
         </div>
-      </div>
+      </motion.nav>
 
-      {/* 3. Right Section: Profile & Settings */}
-      <div className="flex items-center gap-3">
-        {/* User Card */}
-        <div className="flex items-center gap-3 bg-white/80 p-1 pr-5 rounded-[22px] border border-white shadow-sm">
-          <div className="w-11 h-11 rounded-[14px] bg-[#F3FF90] flex items-center justify-center overflow-hidden">
-            <img 
-              src={activeUser?.avatar || "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"} 
-              alt="User" 
-              className="w-full h-full object-cover mix-blend-multiply"
+      <AnimatePresence>
+        {isDrawerOpen ? (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsDrawerOpen(false)}
+              className="fixed inset-0 z-40 bg-black/25 xl:hidden"
             />
-          </div>
-          
-          <div className="flex flex-col">
-            <span className="text-[13px] font-bold text-gray-800 leading-tight">
-              {activeUser?.name || "Emily King"}
-            </span>
-            <span className="text-[10px] text-gray-400 font-semibold tracking-wide uppercase">
-              {activeUser?.role || "Realtor"}
-            </span>
-          </div>
-        </div>
 
-        {/* Sliders Icon */}
-        <motion.div
-          whileHover={{ y: -1, scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="cursor-pointer rounded-[18px] border border-white bg-white/80 p-3.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black"
-        >
-          <SlidersHorizontal size={18} strokeWidth={2.2} />
-        </motion.div>
-      </div>
-    </motion.nav>
+            <motion.aside
+              initial={{ x: -280 }}
+              animate={{ x: 0 }}
+              exit={{ x: -280 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="fixed left-0 top-0 z-50 h-full w-[92px] bg-[#F1F4F2] xl:hidden"
+            >
+              <button
+                type="button"
+                onClick={() => setIsDrawerOpen(false)}
+                className="absolute right-[-44px] top-4 grid h-10 w-10 place-items-center rounded-2xl bg-white text-gray-700 shadow-sm"
+                aria-label="Close menu"
+              >
+                <X size={18} />
+              </button>
+
+              <Sidebar mobile />
+            </motion.aside>
+          </>
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 }

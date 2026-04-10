@@ -11,7 +11,7 @@ const attachmentImage = "https://res.cloudinary.com/dnk0bvpym/image/upload/q_aut
 
 export default function RightSidebar({ selectedContact, activeUser }) {
 	return (
-		<div className="flex h-full w-[320px] flex-col gap-4">
+		<div className="flex h-full w-full flex-col gap-4 xl:w-[320px] xl:max-w-[320px]">
 			<div className="flex justify-end gap-2">
 				<button
 					type="button"
@@ -83,10 +83,10 @@ export default function RightSidebar({ selectedContact, activeUser }) {
 					</div>
 
 					<div className="ml-auto flex w-[82%] justify-end gap-2">
-						<div className="h-[82px] w-[88px] overflow-hidden rounded-xl bg-gray-100 shadow-sm">
+						<div className="h-20 w-20 overflow-hidden rounded-xl bg-gray-100 shadow-sm sm:h-[82px] sm:w-[88px]">
 							<img src={attachmentImage} alt="Attachment preview" className="h-full w-full object-cover" />
 						</div>
-						<div className="h-[82px] w-[88px] overflow-hidden rounded-xl bg-gray-100 shadow-sm">
+						<div className="h-20 w-20 overflow-hidden rounded-xl bg-gray-100 shadow-sm sm:h-[82px] sm:w-[88px]">
 							<img src={attachmentImage} alt="Attachment preview" className="h-full w-full object-cover" />
 						</div>
 					</div>

@@ -30,9 +30,13 @@ function SidebarItem({ icon: Icon, active = false }) {
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({ mobile = false }) {
   return (
-    <aside className="flex h-full w-[92px] shrink-0 flex-col items-center border-r border-gray-200/40 bg-transparent py-5">
+    <aside
+      className={`flex h-full w-[92px] shrink-0 flex-col items-center py-5 ${
+        mobile ? "bg-transparent" : "border-r border-gray-200/40 bg-transparent"
+      }`}
+    >
       
 
       <nav className="flex flex-col gap-3">

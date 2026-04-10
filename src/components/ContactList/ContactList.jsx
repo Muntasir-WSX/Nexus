@@ -90,7 +90,7 @@ export default function ContactList({ onContactSelect }) {
 	};
 
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex h-full w-[280px] flex-col pr-1">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex h-full w-full max-w-[280px] flex-col pr-1 lg:w-[280px]">
 			<div className="mb-5 flex items-center justify-between px-2">
 				<h2 className="text-[42px] font-light leading-none tracking-tighter text-gray-800">All Contacts</h2>
 				<div className="flex items-center gap-1.5">
