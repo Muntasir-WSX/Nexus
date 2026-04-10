@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ChevronUp, Plus, RotateCcw } from "lucide-react";
 import dashboardData from "@/data/dasboardData.json";
 
@@ -29,9 +30,11 @@ function SectionHeader({ count, title }) {
 
 function ContactRow({ contact, active, onClick }) {
 	return (
-		<button
+		<motion.button
 			type="button"
 			onClick={onClick}
+			whileHover={{ y: -1 }}
+			whileTap={{ scale: 0.995 }}
 			className={`relative mb-1 flex w-full items-center justify-between rounded-[16px] px-2 py-2 text-left transition-all ${
 				active ? "bg-white shadow-[0_6px_18px_rgba(0,0,0,0.04)]" : "hover:bg-white/60"
 			}`}
@@ -54,30 +57,52 @@ function ContactRow({ contact, active, onClick }) {
 				</div>
 			</div>
 
-			{active ? <span className="absolute right-0 h-6 w-[3px] rounded-l-full bg-black" /> : null}
-		</button>
+			<AnimatePresence>
+				{active ? (
+					<motion.span
+						initial={{ opacity: 0, x: 4 }}
+						animate={{ opacity: 1, x: 0 }}
+						exit={{ opacity: 0, x: 4 }}
+						className="absolute right-0 h-6 w-[3px] rounded-l-full bg-black"
+					/>
+				) : null}
+			</AnimatePresence>
+		</motion.button>
 	);
 }
 
-export default function ContactList() {
+export default function ContactList({ onContactSelect }) {
 	const shuffledContacts = useMemo(() => shuffleList(dashboardData.contacts), []);
 	const shuffledFavorites = useMemo(() => shuffleList(dashboardData.favorite_contacts), []);
 	const [activeContactId, setActiveContactId] = useState(shuffledContacts[0]?.id ?? null);
 
+	const allContacts = useMemo(() => [...shuffledContacts, ...shuffledFavorites], [shuffledContacts, shuffledFavorites]);
+
+	useEffect(() => {
+		if (!allContacts.length || !onContactSelect) return;
+		const initial = allContacts.find((item) => item.id === activeContactId) ?? allContacts[0];
+		onContactSelect(initial);
+	}, [activeContactId, allContacts, onContactSelect]);
+
+	const handleSelect = (contact) => {
+		setActiveContactId(contact.id);
+		onContactSelect?.(contact);
+	};
+
 	return (
-		<div className="flex h-full w-[280px] flex-col pr-1">
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="flex h-full w-[280px] flex-col pr-1">
 			<div className="mb-5 flex items-center justify-between px-2">
 				<h2 className="text-[42px] font-light leading-none tracking-tighter text-gray-800">All Contacts</h2>
 				<div className="flex items-center gap-1.5">
-					<button type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
+					<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
 						<ArrowLeft size={14} />
-					</button>
-					<button type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
+					</motion.button>
+					<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
 						<ArrowRight size={14} />
-					</button>
-					<button type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
+					</motion.button>
+					<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="button" className="rounded-xl border border-gray-100 bg-white p-1.5 text-gray-500 shadow-sm">
 						<RotateCcw size={14} />
-					</button>
+					</motion.button>
 				</div>
 			</div>
 
@@ -96,7 +121,7 @@ export default function ContactList() {
 						key={contact.id}
 						contact={contact}
 						active={activeContactId === contact.id}
-						onClick={() => setActiveContactId(contact.id)}
+						onClick={() => handleSelect(contact)}
 					/>
 				))}
 
@@ -106,10 +131,10 @@ export default function ContactList() {
 						key={contact.id}
 						contact={contact}
 						active={activeContactId === contact.id}
-						onClick={() => setActiveContactId(contact.id)}
+						onClick={() => handleSelect(contact)}
 					/>
 				))}
 			</div>
-		</div>
+		</motion.div>
 	);
 }

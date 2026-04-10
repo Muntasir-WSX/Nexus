@@ -1,11 +1,18 @@
+"use client";
+
 import React from 'react';
 import { Search, ChevronDown, SlidersHorizontal } from 'lucide-react';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
 import Logo from '../Logo/logo';
 
 export default function Navbar({ activeUser }) {
   return (
-    <nav className="flex w-full items-center justify-between px-6 py-4">
+    <motion.nav
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="flex w-full items-center justify-between px-6 py-4"
+    >
       
       {/* 1. Left Section: Logo */}
       <div className="flex items-center w-[60px]">
@@ -21,9 +28,13 @@ export default function Navbar({ activeUser }) {
             placeholder="Search by Contact, Account, Deal..." 
             className="w-full rounded-[24px] border-none bg-white/60 py-3.5 pl-14 pr-14 text-[14px] shadow-sm outline-none transition-all placeholder:text-gray-400 focus:bg-white focus:ring-1 focus:ring-gray-100"
           />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-gray-100 bg-white p-2 text-gray-400 shadow-sm hover:text-black">
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-gray-100 bg-white p-2 text-gray-400 shadow-sm hover:text-black"
+          >
             <ChevronDown size={14} />
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -50,10 +61,14 @@ export default function Navbar({ activeUser }) {
         </div>
 
         {/* Sliders Icon */}
-        <div className="cursor-pointer rounded-[18px] border border-white bg-white/80 p-3.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black">
+        <motion.div
+          whileHover={{ y: -1, scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="cursor-pointer rounded-[18px] border border-white bg-white/80 p-3.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black"
+        >
           <SlidersHorizontal size={18} strokeWidth={2.2} />
-        </div>
+        </motion.div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
