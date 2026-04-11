@@ -1,4 +1,5 @@
 import { Manrope } from "next/font/google";
+import AppToaster from "@/components/sharedComponents/toast/AppToaster";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="h-full antialiased">
       <body className={`${manrope.variable} bg-[#F1F4F2] h-screen overflow-hidden font-sans`}>
         {children}
+        <AppToaster />
       </body>
     </html>
   );

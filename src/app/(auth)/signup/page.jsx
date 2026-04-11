@@ -2,65 +2,71 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 import { getSupabaseClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
     if (!hasSupabaseConfig) {
-      setError("Supabase env vars are missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local");
+      toast.error("Supabase env vars are missing.", {
+        description: "Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
+      });
       return;
     }
 
     const supabase = getSupabaseClient();
     if (!supabase) {
-      setError("Supabase client could not be initialized. Check NEXT_PUBLIC_SUPABASE_URL format.");
+      toast.error("Supabase client could not be initialized.", {
+        description: "Check NEXT_PUBLIC_SUPABASE_URL format.",
+      });
       return;
     }
 
     setLoading(true);
-    const { error: signUpError } = await supabase.auth.signUp({ email, password });
-    setLoading(false);
+    const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
 
     if (signUpError) {
-      setError(signUpError.message);
+      setLoading(false);
+      toast.error("Sign-up failed", {
+        description: signUpError.message,
+      });
       return;
     }
 
-    setSuccess("Account created. If email confirmation is enabled in Supabase, check your inbox before login.");
-  };
-
-  const handleGoogleAuth = async () => {
-    setError("");
-
-    if (!hasSupabaseConfig) {
-      setError("Supabase env vars are missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local");
+    if (data?.session) {
+      setLoading(false);
+      toast.success("Account created", {
+        description: "Redirecting to dashboard.",
+      });
+      window.location.href = "/dashboard";
       return;
     }
 
-    const supabase = getSupabaseClient();
-    if (!supabase) {
-      setError("Supabase client could not be initialized. Check NEXT_PUBLIC_SUPABASE_URL format.");
+    // If confirmation email is disabled, this signs the user in immediately.
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+
+    if (!signInError) {
+      toast.success("Account created", {
+        description: "Redirecting to dashboard.",
+      });
+      window.location.href = "/dashboard";
       return;
     }
 
-    const { error: oauthError } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/` },
+    toast.success("Account created", {
+      description: "Please verify your email, then sign in.",
     });
-
-    if (oauthError) setError(oauthError.message);
+    router.push("/login");
   };
 
   return (
@@ -99,10 +105,6 @@ export default function SignupPage() {
             placeholder="At least 6 characters"
           />
         </div>
-
-        {error ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p> : null}
-        {success ? <p className="rounded-xl bg-green-50 px-3 py-2 text-sm text-green-700">{success}</p> : null}
-
         <button
           type="submit"
           disabled={loading}
@@ -110,15 +112,6 @@ export default function SignupPage() {
         >
           {loading ? "Creating..." : "Create account"}
           <ArrowRight size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={handleGoogleAuth}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
-        >
-          <FcGoogle className="text-xl" />
-          Continue with Google
         </button>
       </form>
 

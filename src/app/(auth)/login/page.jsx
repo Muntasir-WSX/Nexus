@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 import { getSupabaseClient, hasSupabaseConfig } from "@/lib/supabaseClient";
 
 export default function LoginPage() {
@@ -12,20 +12,22 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     if (!hasSupabaseConfig) {
-      setError("Supabase env vars are missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local");
+      toast.error("Supabase env vars are missing.", {
+        description: "Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
+      });
       return;
     }
 
     const supabase = getSupabaseClient();
     if (!supabase) {
-      setError("Supabase client could not be initialized. Check NEXT_PUBLIC_SUPABASE_URL format.");
+      toast.error("Supabase client could not be initialized.", {
+        description: "Check NEXT_PUBLIC_SUPABASE_URL format.",
+      });
       return;
     }
 
@@ -34,33 +36,16 @@ export default function LoginPage() {
     setLoading(false);
 
     if (signInError) {
-      setError(signInError.message);
+      toast.error("Sign-in failed", {
+        description: signInError.message,
+      });
       return;
     }
 
-    router.push("/");
-  };
-
-  const handleGoogleAuth = async () => {
-    setError("");
-
-    if (!hasSupabaseConfig) {
-      setError("Supabase env vars are missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local");
-      return;
-    }
-
-    const supabase = getSupabaseClient();
-    if (!supabase) {
-      setError("Supabase client could not be initialized. Check NEXT_PUBLIC_SUPABASE_URL format.");
-      return;
-    }
-
-    const { error: oauthError } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/` },
+    toast.success("Welcome back", {
+      description: "Login successful. Redirecting to dashboard.",
     });
-
-    if (oauthError) setError(oauthError.message);
+    window.location.href = "/dashboard";
   };
 
   return (
@@ -98,9 +83,6 @@ export default function LoginPage() {
             placeholder="Your password"
           />
         </div>
-
-        {error ? <p className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p> : null}
-
         <button
           type="submit"
           disabled={loading}
@@ -108,15 +90,6 @@ export default function LoginPage() {
         >
           {loading ? "Signing in..." : "Sign in"}
           <ArrowRight size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={handleGoogleAuth}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
-        >
-          <FcGoogle className="text-xl" />
-          Continue with Google
         </button>
       </form>
 

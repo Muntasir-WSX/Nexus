@@ -1,7 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 const hasValidSupabaseUrl = typeof supabaseUrl === "string" && /^https?:\/\//.test(supabaseUrl);
 const hasSupabaseConfig = hasValidSupabaseUrl && typeof supabaseAnonKey === "string" && supabaseAnonKey.length > 0;
@@ -17,7 +17,7 @@ export function getSupabaseClient() {
   if (!hasSupabaseConfig) return null;
   if (supabaseClient) return supabaseClient;
 
-  supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
+  supabaseClient = createBrowserClient(supabaseUrl, supabaseAnonKey);
   return supabaseClient;
 }
 

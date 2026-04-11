@@ -1,13 +1,87 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Search, ChevronDown, SlidersHorizontal, Menu, X } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Search, ChevronDown, SlidersHorizontal, LogOut, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import Logo from '../Logo/logo';
 import Sidebar from '../sidebar/sidebar';
+import { getSupabaseClient } from '@/lib/supabaseClient';
 
 export default function Navbar({ activeUser }) {
+  const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [sessionUser, setSessionUser] = useState(null);
+
+  useEffect(() => {
+    const supabase = getSupabaseClient();
+    if (!supabase) return undefined;
+
+    let isMounted = true;
+
+    const hydrateSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!isMounted) return;
+      setSessionUser(data?.session?.user ?? null);
+    };
+
+    hydrateSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSessionUser(session?.user ?? null);
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const userCard = useMemo(() => {
+    const email = sessionUser?.email || activeUser?.email || "emily@example.com";
+    const displayName =
+      sessionUser?.user_metadata?.full_name ||
+      sessionUser?.user_metadata?.name ||
+      activeUser?.name ||
+      email.split("@")[0];
+    const image =
+      sessionUser?.user_metadata?.avatar_url ||
+      sessionUser?.user_metadata?.picture ||
+      sessionUser?.user_metadata?.photoURL ||
+      activeUser?.avatar ||
+      `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(email)}`;
+
+    return {
+      displayName,
+      email,
+      image,
+    };
+  }, [activeUser?.avatar, activeUser?.email, activeUser?.name, sessionUser]);
+
+  const handleLogout = async () => {
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      router.replace('/login');
+      return;
+    }
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error('Could not log out', {
+        description: error.message,
+      });
+      return;
+    }
+
+    toast.success('Logged out', {
+      description: 'You have been signed out successfully.',
+    });
+    router.replace('/login');
+    router.refresh();
+  };
 
   return (
     <>
@@ -55,7 +129,7 @@ export default function Navbar({ activeUser }) {
           <div className="flex items-center gap-2 rounded-[22px] border border-white bg-white/80 p-1 pr-2 shadow-sm sm:gap-3 sm:pr-5">
             <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-[#F3FF90] sm:h-11 sm:w-11 sm:rounded-[14px]">
               <img
-                src={activeUser?.avatar || "https://res.cloudinary.com/dnk0bvpym/image/upload/q_auto/f_auto/v1774706231/blog3-Pqq9Xkjs_onxzad.jpg"}
+                src={userCard.image}
                 alt="User"
                 className="h-full w-full object-cover mix-blend-multiply"
               />
@@ -63,10 +137,10 @@ export default function Navbar({ activeUser }) {
 
             <div className="hidden flex-col sm:flex">
               <span className="text-[13px] font-bold leading-tight text-gray-800">
-                {activeUser?.name || "Emily King"}
+                {userCard.displayName}
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-                {activeUser?.role || "Realtor"}
+              <span className="max-w-46 truncate text-[10px] font-semibold tracking-wide text-gray-400">
+                {userCard.email}
               </span>
             </div>
           </div>
@@ -79,6 +153,17 @@ export default function Navbar({ activeUser }) {
           >
             <SlidersHorizontal size={18} strokeWidth={2.2} />
           </motion.div>
+
+          <motion.button
+            type="button"
+            onClick={handleLogout}
+            whileHover={{ y: -1, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="rounded-2xl border border-white bg-white/80 p-2.5 text-gray-500 shadow-sm transition-all hover:bg-white hover:text-black sm:rounded-[18px] sm:p-3.5"
+            aria-label="Log out"
+          >
+            <LogOut size={18} strokeWidth={2.2} />
+          </motion.button>
         </div>
       </motion.nav>
 
