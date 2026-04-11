@@ -9,6 +9,11 @@ const manrope = Manrope({
 export const metadata = {
   title: "Nexus Dashboard",
   description: "Real Estate Management Dashboard",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

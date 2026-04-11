@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Sidebar from "@/components/sharedComponents/sidebar/sidebar";
 import ContactList from "@/components/ContactList/ContactList";
 import MainProfile from "@/components/MainProfile/MainProfile";
@@ -77,23 +77,73 @@ export default function Page() {
             </div>
 
             <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto rounded-2xl bg-white/25 p-2">
-              {mobileTab === "notes" ? (
-                <RightSidebar selectedContact={selectedContact} activeUser={dashboardData.activeUser} />
-              ) : (
-                <MainProfile contact={selectedContact} propertyPreview={dashboardData.propertyPreview} />
-              )}
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileTab === "notes" ? (
+                  <motion.div
+                    key="notes-panel"
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -16 }}
+                    transition={{ duration: 0.28, ease: "easeOut" }}
+                    className="h-full"
+                  >
+                    <RightSidebar selectedContact={selectedContact} activeUser={dashboardData.activeUser} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="profile-panel"
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 16 }}
+                    transition={{ duration: 0.28, ease: "easeOut" }}
+                    className="h-full"
+                  >
+                    <MainProfile contact={selectedContact} propertyPreview={dashboardData.propertyPreview} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </section>
         </div>
 
         <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto rounded-3xl border border-white/70 bg-white/35 p-3 md:hidden">
-          {mobileTab === "contacts" ? <ContactList onContactSelect={setSelectedContact} /> : null}
-          {mobileTab === "profile" ? (
-            <MainProfile contact={selectedContact} propertyPreview={dashboardData.propertyPreview} />
-          ) : null}
-          {mobileTab === "notes" ? (
-            <RightSidebar selectedContact={selectedContact} activeUser={dashboardData.activeUser} />
-          ) : null}
+          <AnimatePresence mode="wait" initial={false}>
+            {mobileTab === "contacts" ? (
+              <motion.div
+                key="mobile-contacts"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <ContactList onContactSelect={setSelectedContact} />
+              </motion.div>
+            ) : null}
+
+            {mobileTab === "profile" ? (
+              <motion.div
+                key="mobile-profile"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <MainProfile contact={selectedContact} propertyPreview={dashboardData.propertyPreview} />
+              </motion.div>
+            ) : null}
+
+            {mobileTab === "notes" ? (
+              <motion.div
+                key="mobile-notes"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                <RightSidebar selectedContact={selectedContact} activeUser={dashboardData.activeUser} />
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </div>
       </div>
 
